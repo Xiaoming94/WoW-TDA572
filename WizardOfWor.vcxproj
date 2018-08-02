@@ -123,6 +123,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="constants.h" />
     <ClInclude Include="includes\avancezlib.h" />
     <ClInclude Include="includes\component.h" />
     <ClInclude Include="includes\game.h" />
