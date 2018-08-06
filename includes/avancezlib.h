@@ -3,6 +3,9 @@
 
 #include "SDL.h"
 #include "SDL_ttf.h"
+// Defining standard path to assets directory
+
+#define ASSETS_ROOT "assets/"
 
 class Sprite
 {

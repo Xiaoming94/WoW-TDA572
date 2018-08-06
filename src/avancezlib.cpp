@@ -1,7 +1,5 @@
 #include "avancezlib.h"
-
-
-
+#include <string>
 
 // Creates the main window. Returns true on success.
 bool AvancezLib::init(int width, int height)
@@ -126,8 +124,13 @@ bool AvancezLib::update()
 }
 
 
-Sprite * AvancezLib::createSprite(const char * path)
+Sprite * AvancezLib::createSprite(const char * spriteName)
 {
+	std::string spriteN(spriteName);
+	std::string fullSpritePath = ASSETS_ROOT + spriteN;
+	char * path = new char[fullSpritePath.length() + 1];
+	strcpy(path, fullSpritePath.c_str());
+
 	SDL_Surface* surf = SDL_LoadBMP(path);
 	if (surf == NULL)
 	{

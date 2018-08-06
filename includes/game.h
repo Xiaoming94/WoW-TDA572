@@ -28,7 +28,7 @@ public:
 		PlayerBehaviourComponent * player_behaviour = new PlayerBehaviourComponent();
 		player_behaviour->Create(system, player, &game_objects, &rockets_pool);
 		RenderComponent * player_render = new RenderComponent();
-		player_render->Create(system, player, &game_objects, "assets/player.bmp");
+		player_render->Create(system, player, &game_objects, "player.bmp");
 
 		player->Create();
 		player->AddComponent(player_behaviour);
@@ -42,14 +42,14 @@ public:
 			RocketBehaviourComponent * behaviour = new RocketBehaviourComponent();
 			behaviour->Create(system, *rocket, &game_objects);
 			RenderComponent * render = new RenderComponent();
-			render->Create(system, *rocket, &game_objects, "assets/rocket.bmp");
+			render->Create(system, *rocket, &game_objects, "rocket.bmp");
 			(*rocket)->Create();
 			(*rocket)->AddComponent(behaviour);
 			(*rocket)->AddComponent(render);
 		}
 
 
-		life_sprite = system->createSprite("assets/player.bmp");
+		life_sprite = system->createSprite("player.bmp");
 		score = 0;
 	}
 
