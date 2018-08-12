@@ -18,9 +18,8 @@
 #define TILE_LEFT "WallLeft.bmp"
 #define TILE_RIGHT "WallRight.bmp"
 
-#include "game_object.h"
-#include "component.h"
 #include <string>
+#include "game_object.h"
 
 class MapTile :
 	public GameObject
@@ -29,12 +28,12 @@ public:
 	MapTile();
 	~MapTile();
 	virtual std::string getWallType();
-	int bwp[32][32] = { 0 }; // Binary Wall pixel	
+	bool bwp[32][32] = { false }; // Binary Wall pixel	
 };
 
-class MapTileRenderComponent :
+/*class MapTileRenderComponent :
 	public RenderComponent
 {
 
-};
+};*/
 #endif

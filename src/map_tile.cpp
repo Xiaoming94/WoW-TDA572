@@ -12,3 +12,8 @@ MapTile::~MapTile()
 {
 	SDL_Log("Tile Destroyed");
 }
+
+std::string MapTile::getWallType()
+{
+	return "Default Wall";
+}
