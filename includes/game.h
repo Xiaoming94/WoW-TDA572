@@ -1,10 +1,14 @@
 
 bool change_direction = false;
 
+#include "game_map.h"
+
 class Game : public GameObject
 {
 	std::set<GameObject*> game_objects;	// http://www.cplusplus.com/reference/set/set/
 	
+	GameMap gameMap = CreateStandardMap();
+
 	AvancezLib* system;
 
 	ObjectPool<Rocket> rockets_pool;	// used to instantiate rockets
