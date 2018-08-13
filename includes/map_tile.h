@@ -28,7 +28,8 @@ public:
 	MapTile();
 	~MapTile();
 	virtual std::string getWallType();
-	bool bwp[32][32] = { false }; // Binary Wall pixel	
+	virtual bool ** getBinaryWall();
+	//bool bwp[32][32] = { false }; // Binary Wall pixel	
 };
 
 /*class MapTileRenderComponent :
@@ -37,5 +38,5 @@ public:
 
 };*/
 
-void printBinaryMap(MapTile tile);
+void printBinaryMap(MapTile * tile);
 #endif
