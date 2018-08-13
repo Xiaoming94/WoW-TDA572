@@ -36,4 +36,6 @@ public:
 {
 
 };*/
+
+void printBinaryMap(MapTile tile);
 #endif

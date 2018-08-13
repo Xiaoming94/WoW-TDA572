@@ -14,7 +14,6 @@ const float			ROCKET_SPEED = 160.0f;
 const float			ALIEN_SPEED = 40.0f;
 const float			BOMB_SPEED = 120.0f;
 
-
 float game_speed = 1.f;		// speed of the game; it is increased each time all the aliens are hit
 							// it is also the score multiplier
 
