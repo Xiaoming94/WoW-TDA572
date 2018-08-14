@@ -32,11 +32,13 @@ public:
 	GameMap(
 		std::string mapString,
 		int width,
-		int height
+		int height,
+		AvancezLib * system,
+		std::set<GameObject*> * game_objects
 	);
 	~GameMap();
+	void renderMap(float dt);
 };
 
-GameMap CreateStandardMap();
-
+GameMap * CreateStandardMap(AvancezLib * system, std::set<GameObject*> * game_objects);
 #endif

@@ -6,8 +6,6 @@ bool change_direction = false;
 class Game : public GameObject
 {
 	std::set<GameObject*> game_objects;	// http://www.cplusplus.com/reference/set/set/
-	
-	GameMap gameMap = CreateStandardMap();
 
 	AvancezLib* system;
 
@@ -16,6 +14,8 @@ class Game : public GameObject
 	Player * player;
 
 	Sprite * life_sprite;
+
+	GameMap * gameMap;
 	bool game_over;
 
 	unsigned int score = 0;
@@ -27,6 +27,7 @@ public:
 		SDL_Log("Game::Create");
 
 		this->system = system;
+		gameMap = CreateStandardMap(system, &game_objects);
 
 		player = new Player();
 		PlayerBehaviourComponent * player_behaviour = new PlayerBehaviourComponent();
@@ -70,6 +71,7 @@ public:
 		if (IsGameOver())
 			dt = 0.f;
 
+		gameMap->renderMap(dt);
 		for (auto go = game_objects.begin(); go != game_objects.end(); go++)
 			(*go)->Update(dt);
 	}

@@ -2,85 +2,107 @@
 #include <sstream>
 #include <iostream>
 
-MapTile * buildMapTile(std::string tileToken) {
+MapTile * buildMapTile(std::string tileToken, int row, int col) {
 	if (!tileToken.compare("bh"))
 	{
-		return new TileBH();
+		return new TileBH(row,col);
 	}
 	if (!tileToken.compare("bv"))
 	{
-		return new TileBV();
+		return new TileBV(row,col);
 	}
 	if (!tileToken.compare("ctl"))
 	{
-		return new TileCTL();
+		return new TileCTL(row,col);
 	}
 	if (!tileToken.compare("ctr"))
 	{
-		return new TileCTR();
+		return new TileCTR(row,col);
 	}
 	if (!tileToken.compare("cbl"))
 	{
-		return new TileCBL();
+		return new TileCBL(row,col);
 	}
 	if (!tileToken.compare("cbr"))
 	{
-		return new TileCBR();
+		return new TileCBR(row,col);
 	}
-	if (!tileToken.compare("up"))
+	if (!tileToken.compare("u"))
 	{
-		return new TileUp();
+		return new TileUp(row,col);
 	}
-	if (!tileToken.compare("left"))
+	if (!tileToken.compare("l"))
 	{
-		return new TileLeft();
+		return new TileLeft(row,col);
 	}
-	if (!tileToken.compare("right"))
+	if (!tileToken.compare("r"))
 	{
-		return new TileRight();
+		return new TileRight(row,col);
 	}
-	if (!tileToken.compare("down"))
+	if (!tileToken.compare("d"))
 	{
-		return new TileDown();
+		return new TileDown(row,col);
 	}
 	else
 	{
-		return new MapTile();
+		return new MapTile(row,col);
 	}
 }
 
 GameMap::GameMap(
 	std::string mapString,
 	int width,
-	int height
+	int height,
+	AvancezLib * system,
+	std::set<GameObject*> * game_objects
 )
 {
 	this -> width  = width;
 	this -> height = height;
 	std::istringstream mss = std::istringstream(mapString);
 	std::string line;
+	int row = 0;
 	while (std::getline(mss, line, '\n'))
 	{
 		std::istringstream tilestring = std::istringstream(line);
 		std::string tileToken;
+		int col = 0;
 		while (std::getline(tilestring, tileToken, ','))
 		{
-			MapTile * tile = buildMapTile(tileToken);
-			printBinaryMap(tile);
+			MapTile * tile = buildMapTile(tileToken,row,col);
 			tiles.push_back(tile);
+			col++;
 		}
+		row++;
+	}
+	for (MapTile * tile : tiles)
+	{
+		RenderComponent * tileRenderer = createTileRenderer(tile, system, game_objects);
+		tile -> AddComponent(tileRenderer);
 	}
 }
 
 
 GameMap::~GameMap()
 {
+	//To be implemented
 }
 
-GameMap CreateStandardMap()
+void GameMap::renderMap(float dt)
+{
+	for (MapTile * tile : tiles)
+	{
+		tile -> Update(dt);
+	}
+}
+
+GameMap * CreateStandardMap(
+	AvancezLib * system,
+	std::set <GameObject*> * game_objects	
+)
 {
 	std::string standardMap =
-		"bh,bv,cbl,cbr,ctl,ctr,down,left,right,up\n";
+		"ctl,bv,ctr\nl,bv,r\ncbl,bv,cbr";
 
-	return GameMap(standardMap, 10,1);
+	return new GameMap(standardMap, 3,3, system, game_objects);
 }
