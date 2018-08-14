@@ -1,8 +1,8 @@
 #include "map_tile_ctr.h"
 #include "SDL.h"
 
-TileCTR::TileCTR() :
-	MapTile()
+TileCTR::TileCTR(int row, int col) :
+	MapTile(row, col)
 {
 	SDL_Log("MapTile CTR");
 }

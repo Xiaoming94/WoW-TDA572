@@ -1,8 +1,8 @@
 #include "map_tile_cbr.h"
 #include "SDL.h"
 
-TileCBR::TileCBR() :
-	MapTile()
+TileCBR::TileCBR(int row, int col) :
+	MapTile(row, col)
 {
 	SDL_Log("MapTile CBR");
 }

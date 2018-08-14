@@ -6,7 +6,7 @@ class TileDown :
 	public MapTile
 {
 public:
-	TileDown();
+	TileDown(int row, int col);
 	std::string getWallType();
 	bool ** getBinaryWall();
 };

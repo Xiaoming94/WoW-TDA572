@@ -1,8 +1,8 @@
 #include "map_tile_right.h"
 #include "SDL.h"
 
-TileRight::TileRight() :
-	MapTile()
+TileRight::TileRight(int row, int col) :
+	MapTile(row, col)
 {
 	SDL_Log("MapTile RIGHT");
 }

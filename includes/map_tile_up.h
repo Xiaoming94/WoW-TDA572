@@ -6,7 +6,7 @@ class TileUp :
 	public MapTile
 {
 public:
-	TileUp();
+	TileUp(int row, int col);
 	std::string getWallType();
 	bool ** getBinaryWall();
 };

@@ -6,7 +6,7 @@ class TileBV :
 	public MapTile
 {
 public:
-	TileBV();
+	TileBV(int row, int col);
 	std::string getWallType();
 	bool ** getBinaryWall();
 };

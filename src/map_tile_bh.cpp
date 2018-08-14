@@ -1,8 +1,8 @@
 #include "map_tile_bh.h"
 #include "SDL.h"
 
-TileBH::TileBH() :
-	MapTile()
+TileBH::TileBH(int row, int col) :
+	MapTile(row, col)
 {
 	SDL_Log("MapTile :: TileBH");
 }

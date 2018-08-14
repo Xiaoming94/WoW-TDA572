@@ -1,12 +1,17 @@
 #include "map_tile.h"
 #include "avancezlib.h"
 #include <iostream>
-
-MapTile::MapTile()
+#define MAP_OFFSET 64
+MapTile::MapTile(int row, int col)
 {
 	SDL_Log("Tile Created");
 
+	std::cout << "row :" << row << " col: " << col << "\n";
 	this -> enabled = true;
+	this -> verticalPosition   = MAP_OFFSET + row * SPRITE_SIDE;
+	this -> horizontalPosition = MAP_OFFSET + col * SPRITE_SIDE;
+	std::cout << "x: " << horizontalPosition <<
+		" y: " << verticalPosition << "\n";
 }
 
 MapTile::~MapTile()
@@ -47,4 +52,11 @@ void printBinaryMap(MapTile * tile)
 	}
 	std::cout << "]\n";
 
+}
+
+RenderComponent * createTileRenderer(MapTile * tile, AvancezLib * system, std::set<GameObject*> * game_objects)
+{
+	RenderComponent * tileRenderer = new RenderComponent();
+	tileRenderer->Create(system, tile, game_objects, tile->getWallType().c_str());
+	return tileRenderer;
 }

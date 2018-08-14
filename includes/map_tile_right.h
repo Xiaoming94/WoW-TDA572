@@ -6,7 +6,7 @@ class TileRight :
 	public MapTile
 {
 public:
-	TileRight();
+	TileRight(int row, int col);
 	std::string getWallType();
 	bool ** getBinaryWall();
 };

@@ -6,7 +6,7 @@ class TileCTR :
 	public MapTile
 {
 public:
-	TileCTR();
+	TileCTR(int row, int col);
 	std::string getWallType();
 	bool ** getBinaryWall();
 };

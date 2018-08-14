@@ -1,8 +1,8 @@
 #include "map_tile_up.h"
 #include "SDL.h"
 
-TileUp::TileUp() :
-	MapTile()
+TileUp::TileUp(int row, int col) :
+	MapTile(row, col)
 {
 	SDL_Log("MapTile Up");
 }

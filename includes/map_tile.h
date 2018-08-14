@@ -21,6 +21,7 @@
 
 #include <string>
 #include "game_object.h"
+#include "component.h"
 
 /**
  * This Is the Base class for a MapTile
@@ -33,7 +34,7 @@ class MapTile :
 	public GameObject
 {
 public:
-	MapTile();
+	MapTile(int row, int col);
 	~MapTile();
 	/**
 	 * Function getWallType();
@@ -45,11 +46,7 @@ public:
 	//bool bwp[32][32] = { false }; // Binary Wall pixel	
 };
 
-/*class MapTileRenderComponent :
-	public RenderComponent
-{
-
-};*/
-
 void printBinaryMap(MapTile * tile);
+
+RenderComponent * createTileRenderer(MapTile * tile, AvancezLib * system, std::set<GameObject*> * game_objects);
 #endif

@@ -1,8 +1,8 @@
 #include "map_tile_down.h"
 #include "SDL.h"
 
-TileDown::TileDown() :
-	MapTile()
+TileDown::TileDown(int row, int col) :
+	MapTile(row, col)
 {
 	SDL_Log("MapTile DOWN");
 }
