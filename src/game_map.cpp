@@ -101,8 +101,13 @@ GameMap * CreateStandardMap(
 	std::set <GameObject*> * game_objects	
 )
 {
-	std::string standardMap =
-		"ctl,bv,ctr\nl,bv,r\ncbl,bv,cbr";
+	std::string standardMap = "ctl,bv,bv,u,u,u,bv,bv,ctr\n";
+	standardMap = standardMap + "bh,ctl,bv,bh,bh,bh,bv,ctr,bh\n";
+	standardMap = standardMap + "bh,cbl,bv,r,bh,l,bv,cbr,bh\n";
+	standardMap = standardMap + "l,bv,bv,e,e,e,bv,bv,r\n";
+	standardMap = standardMap + "bh,ctl,bv,r,bh,l,bv,ctr,bh\n";
+	standardMap = standardMap + "bh,cbl,bv,bh,bh,bh,bv,cbr,bh\n";
+	standardMap = standardMap + "cbl,bv,bv,d,d,d,bv,bv,cbr";
 
 	return new GameMap(standardMap, 3,3, system, game_objects);
 }
