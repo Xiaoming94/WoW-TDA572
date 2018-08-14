@@ -5,7 +5,7 @@ This project is for the Game Engine Architecture Course (TDA572) given at the In
 
 ## Project Tracker (TODO LIST)
 ------
-- [ ] Game Map Model
+- [x] Game Map Model
 - [ ] Basic Controls for Player 1
 - [ ] Player 2 Placement and Rendering
 - [ ] Basic Controls for Player 2
