@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -108,7 +108,7 @@
       <AdditionalLibraryDirectories>%USERPROFILE%/SDL2/lib/x64;%USERPROFILE%/SDL2_ttf/lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>main</EntryPointSymbol>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <AdditionalOptions>/verbose %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ClCompile>
@@ -121,13 +121,37 @@
     <ClCompile Include="src\component.cpp" />
     <ClCompile Include="src\game_object.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\game_map.cpp" />
+    <ClCompile Include="src\map_tile.cpp" />
+    <ClCompile Include="src\map_tile_bh.cpp" />
+    <ClCompile Include="src\map_tile_bv.cpp" />
+    <ClCompile Include="src\map_tile_cbl.cpp" />
+    <ClCompile Include="src\map_tile_cbr.cpp" />
+    <ClCompile Include="src\map_tile_ctl.cpp" />
+    <ClCompile Include="src\map_tile_ctr.cpp" />
+    <ClCompile Include="src\map_tile_down.cpp" />
+    <ClCompile Include="src\map_tile_left.cpp" />
+    <ClCompile Include="src\map_tile_right.cpp" />
+    <ClCompile Include="src\map_tile_up.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="constants.h" />
     <ClInclude Include="includes\avancezlib.h" />
     <ClInclude Include="includes\component.h" />
+    <ClInclude Include="includes\constants.h" />
     <ClInclude Include="includes\game.h" />
     <ClInclude Include="includes\game_object.h" />
+    <ClInclude Include="includes\game_map.h" />
+    <ClInclude Include="includes\map_tile.h" />
+    <ClInclude Include="includes\map_tile_bh.h" />
+    <ClInclude Include="includes\map_tile_bv.h" />
+    <ClInclude Include="includes\map_tile_cbl.h" />
+    <ClInclude Include="includes\map_tile_cbr.h" />
+    <ClInclude Include="includes\map_tile_ctl.h" />
+    <ClInclude Include="includes\map_tile_ctr.h" />
+    <ClInclude Include="includes\map_tile_down.h" />
+    <ClInclude Include="includes\map_tile_left.h" />
+    <ClInclude Include="includes\map_tile_right.h" />
+    <ClInclude Include="includes\map_tile_up.h" />
     <ClInclude Include="includes\object_pool.h" />
     <ClInclude Include="includes\player.h" />
     <ClInclude Include="includes\rocket.h" />
