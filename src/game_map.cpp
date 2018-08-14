@@ -1,5 +1,4 @@
 #include "game_map.h"
-#include "map_tile_bh.h"
 #include <sstream>
 #include <iostream>
 
@@ -7,6 +6,42 @@ MapTile * buildMapTile(std::string tileToken) {
 	if (!tileToken.compare("bh"))
 	{
 		return new TileBH();
+	}
+	if (!tileToken.compare("bv"))
+	{
+		return new TileBV();
+	}
+	if (!tileToken.compare("ctl"))
+	{
+		return new TileCTL();
+	}
+	if (!tileToken.compare("ctr"))
+	{
+		return new TileCTR();
+	}
+	if (!tileToken.compare("cbl"))
+	{
+		return new TileCBL();
+	}
+	if (!tileToken.compare("cbr"))
+	{
+		return new TileCBR();
+	}
+	if (!tileToken.compare("up"))
+	{
+		return new TileUp();
+	}
+	if (!tileToken.compare("left"))
+	{
+		return new TileLeft();
+	}
+	if (!tileToken.compare("right"))
+	{
+		return new TileRight();
+	}
+	if (!tileToken.compare("down"))
+	{
+		return new TileDown();
 	}
 	else
 	{
@@ -26,12 +61,13 @@ GameMap::GameMap(
 	std::string line;
 	while (std::getline(mss, line, '\n'))
 	{
-		SDL_Log(line.c_str());
 		std::istringstream tilestring = std::istringstream(line);
 		std::string tileToken;
 		while (std::getline(tilestring, tileToken, ','))
 		{
-			tiles.push_back(buildMapTile(tileToken));
+			MapTile * tile = buildMapTile(tileToken);
+			printBinaryMap(tile);
+			tiles.push_back(tile);
 		}
 	}
 }
@@ -44,7 +80,7 @@ GameMap::~GameMap()
 GameMap CreateStandardMap()
 {
 	std::string standardMap =
-		"ctl,bh,ctr\nleft,bh,right\ncbl,bh,cbr";
+		"bh,bv,cbl,cbr,ctl,ctr,down,left,right,up\n";
 
-	return GameMap(standardMap, 3, 3);
+	return GameMap(standardMap, 10,1);
 }
