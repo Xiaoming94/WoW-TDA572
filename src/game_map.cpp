@@ -51,14 +51,10 @@ MapTile * buildMapTile(std::string tileToken, int row, int col) {
 
 GameMap::GameMap(
 	std::string mapString,
-	int width,
-	int height,
 	AvancezLib * system,
 	std::set<GameObject*> * game_objects
 )
 {
-	this -> width  = width;
-	this -> height = height;
 	std::istringstream mss = std::istringstream(mapString);
 	std::string line;
 	int row = 0;
@@ -73,8 +69,13 @@ GameMap::GameMap(
 			tiles.push_back(tile);
 			col++;
 		}
+		if (col > width)
+		{
+			this->width = col;
+		}
 		row++;
 	}
+	this->height = row;
 	for (MapTile * tile : tiles)
 	{
 		RenderComponent * tileRenderer = createTileRenderer(tile, system, game_objects);
@@ -109,5 +110,5 @@ GameMap * CreateStandardMap(
 	standardMap = standardMap + "bh,cbl,bv,bh,bh,bh,bv,cbr,bh\n";
 	standardMap = standardMap + "cbl,bv,bv,d,d,d,bv,bv,cbr";
 
-	return new GameMap(standardMap, 3,3, system, game_objects);
+	return new GameMap(standardMap, system, game_objects);
 }

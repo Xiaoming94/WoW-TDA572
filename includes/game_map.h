@@ -31,8 +31,6 @@ private:
 public:
 	GameMap(
 		std::string mapString,
-		int width,
-		int height,
 		AvancezLib * system,
 		std::set<GameObject*> * game_objects
 	);
