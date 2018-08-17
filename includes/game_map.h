@@ -25,18 +25,24 @@ class GameMap
 {
 private:
 	std::vector<MapTile*> tiles;
-	int width; // Width in Tiles
-	int height; // Height in Tiles
-	bool * bpm; // binary Pixel Map
+	bool ** bpm; // binary Pixel Map
+	int width;
+	int height;
 public:
 	GameMap(
 		std::string mapString,
+		int width,
+		int height,
 		AvancezLib * system,
 		std::set<GameObject*> * game_objects
 	);
 	~GameMap();
 	void renderMap(float dt);
+	void printBinaryMap();
 };
 
 GameMap * CreateStandardMap(AvancezLib * system, std::set<GameObject*> * game_objects);
+GameMap * CreateMap(std::string mapString, AvancezLib * system, std::set<GameObject*> * game_objects);
+
+
 #endif

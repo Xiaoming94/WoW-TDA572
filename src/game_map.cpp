@@ -2,6 +2,27 @@
 #include <sstream>
 #include <iostream>
 
+bool ** initBinaryMap(int width, int height)
+{
+	bool ** bpm = new bool*[height * SPRITE_SIDE];
+	for (int i = 0; i < height * SPRITE_SIDE; i++)
+		bpm[i] = new bool[width * SPRITE_SIDE];
+	return bpm;
+}
+
+void fillBinaryMap(bool ** bpm, int row, int col, MapTile * tile)
+{
+	bool ** bwp = tile->getBinaryWall();
+	for (int i = 0; i < SPRITE_SIDE; i++)
+	{
+		for (int j = 0; j < SPRITE_SIDE; j++)
+		{
+			bpm[row * SPRITE_SIDE + i][col * SPRITE_SIDE + j] =
+				bwp[i][j];
+		}
+	}
+}
+
 MapTile * buildMapTile(std::string tileToken, int row, int col) {
 	if (!tileToken.compare("bh"))
 	{
@@ -51,10 +72,15 @@ MapTile * buildMapTile(std::string tileToken, int row, int col) {
 
 GameMap::GameMap(
 	std::string mapString,
+	int width,
+	int height,
 	AvancezLib * system,
 	std::set<GameObject*> * game_objects
 )
 {
+	this->bpm = initBinaryMap(width, height);
+	this->width = width;
+	this->height = height;
 	std::istringstream mss = std::istringstream(mapString);
 	std::string line;
 	int row = 0;
@@ -67,26 +93,23 @@ GameMap::GameMap(
 		{
 			MapTile * tile = buildMapTile(tileToken,row,col);
 			tiles.push_back(tile);
+			fillBinaryMap(bpm, row, col, tile);
 			col++;
-		}
-		if (col > width)
-		{
-			this->width = col;
 		}
 		row++;
 	}
-	this->height = row;
 	for (MapTile * tile : tiles)
 	{
 		RenderComponent * tileRenderer = createTileRenderer(tile, system, game_objects);
 		tile -> AddComponent(tileRenderer);
 	}
+	SDL_Log("GameMap Created");
 }
 
 
 GameMap::~GameMap()
 {
-	//To be implemented
+	SDL_Log("GameMap Destroyed");
 }
 
 void GameMap::renderMap(float dt)
@@ -95,6 +118,21 @@ void GameMap::renderMap(float dt)
 	{
 		tile -> Update(dt);
 	}
+}
+
+void GameMap::printBinaryMap()
+{
+	std::cout << "[\n";
+	for (int i = 0; i < SPRITE_SIDE * height; i++)
+	{
+		std::cout << "\t";
+		for (int j = 0; j < SPRITE_SIDE * width; j++)
+		{
+			std::cout << this->bpm[i][j] << " ";
+		}
+		std::cout << "\n";
+	}
+	std::cout << "]";
 }
 
 GameMap * CreateStandardMap(
@@ -110,5 +148,30 @@ GameMap * CreateStandardMap(
 	standardMap = standardMap + "bh,cbl,bv,bh,bh,bh,bv,cbr,bh\n";
 	standardMap = standardMap + "cbl,bv,bv,d,d,d,bv,bv,cbr";
 
-	return new GameMap(standardMap, system, game_objects);
+	return CreateMap(standardMap, system, game_objects);
 }
+
+GameMap * CreateMap(std::string mapString, AvancezLib * system, std::set<GameObject*> * game_objects)
+{
+	int width = 0;
+	int height = 0;
+	std::istringstream mss = std::istringstream(mapString);
+	std::string line;
+	int row = 0;
+	while (std::getline(mss, line, '\n'))
+	{
+		std::istringstream lineSS = std::istringstream(line);
+		std::string tileToken;
+		int col = 0;
+		while (std::getline(lineSS, tileToken, ','))
+		{
+			col++;
+		}
+		if (col > width)
+			width = col;
+		row++;
+	}
+	height = row;
+	return new GameMap(mapString, width, height, system, game_objects);
+}
+
