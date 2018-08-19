@@ -55,10 +55,12 @@ public:
 		bool fire; // space
 		bool left; // left arrow
 		bool right; // right arrow
+		bool up;	// up arrow
+		bool down;	// down arrow
 	};
 
 	// Returns the keyboard status. If a flag is set, the corresponding key is being held down.
-	void getKeyStatus(KeyStatus& keys);
+	KeyStatus getKeyStatus(int playerNum);
 
 private:
 	SDL_Window * window;
@@ -66,7 +68,8 @@ private:
 
 	TTF_Font* font;
 
-	KeyStatus key;
+	KeyStatus p1key;
+	KeyStatus p2key;
 };
 
 

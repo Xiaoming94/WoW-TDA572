@@ -37,7 +37,20 @@ bool AvancezLib::init(int width, int height)
 	}
 
 	// initialize the keys
-	key.fire = false;	key.left = false;	key.right = false;
+
+	// Player 1
+	p1key.fire = false;	
+	p1key.left = false;	
+	p1key.right = false;
+	p1key.up = false;
+	p1key.down = false;
+
+	// Player 2
+	p2key.fire = false;
+	p2key.left = false;
+	p2key.right = false;
+	p2key.up = false;
+	p2key.down = false;
 
 	//Initialize renderer color
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -85,13 +98,19 @@ bool AvancezLib::update()
 				go_on = false;
 				break;
 			case SDLK_SPACE:
-				key.fire = true;
+				p1key.fire = true;
 				break;
-			case SDLK_LEFT:
-				key.left = true;
+			case SDLK_a:
+				p1key.left = true;
 				break;
-			case SDLK_RIGHT:
-				key.right = true;
+			case SDLK_d:
+				p1key.right = true;
+				break;
+			case SDLK_w:
+				p1key.up = true;
+				break;
+			case SDLK_s:
+				p1key.down = true;
 				break;
 			}
 		}
@@ -101,13 +120,19 @@ bool AvancezLib::update()
 			switch (event.key.keysym.sym)
 			{
 			case SDLK_SPACE:
-				key.fire = false;
+				p1key.fire = false;
 				break;
-			case SDLK_LEFT:
-				key.left = false;
+			case SDLK_a:
+				p1key.left = false;
 				break;
-			case SDLK_RIGHT:
-				key.right = false;
+			case SDLK_d:
+				p1key.right = false;
+				break;
+			case SDLK_w:
+				p1key.up = false;
+				break;
+			case SDLK_s:
+				p1key.down = false;
 				break;
 			}
 		}
@@ -178,11 +203,9 @@ float AvancezLib::getElapsedTime()
 	return SDL_GetTicks() / 1000.f;
 }
 
-void AvancezLib::getKeyStatus(KeyStatus & keys)
+AvancezLib::KeyStatus AvancezLib::getKeyStatus(int playerNum)
 {
-	keys.fire = key.fire;
-	keys.left = key.left;
-	keys.right = key.right;
+	return playerNum == 1 ? p1key : p2key;
 }
 
 

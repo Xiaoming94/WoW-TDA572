@@ -31,6 +31,7 @@ public:
 
 		player = new Player();
 		PlayerBehaviourComponent * player_behaviour = new PlayerBehaviourComponent();
+		player_behaviour->setPlayerNumber(1);
 		player_behaviour->Create(system, player, &game_objects, &rockets_pool);
 		RenderComponent * player_render = new RenderComponent();
 		player_render->Create(system, player, &game_objects, "player.bmp");

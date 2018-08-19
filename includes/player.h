@@ -4,6 +4,7 @@ class PlayerBehaviourComponent : public Component
 {
 	float time_fire_pressed;	// time from the last time the fire button was pressed
 	ObjectPool<Rocket> * rockets_pool;
+	int playerNumber;
 
 public:
 	virtual ~PlayerBehaviourComponent() {}
@@ -21,16 +22,19 @@ public:
 
 		time_fire_pressed = -10000.f;
 	}
-
+	virtual void setPlayerNumber(int playerNumber)
+	{
+		this->playerNumber = playerNumber;
+	}
 	virtual void Update(float dt)
 	{
-		AvancezLib::KeyStatus keys;
-		system->getKeyStatus(keys);
+		AvancezLib::KeyStatus keys = 
+			system->getKeyStatus(this -> playerNumber);
 		if (keys.right)
 			Move(dt * PLAYER_SPEED);
 		else if (keys.left)
 			Move(-dt * PLAYER_SPEED);
-		else if (keys.fire)
+		if (keys.fire)
 		{
 			if (CanFire())
 			{
