@@ -1,3 +1,10 @@
+enum PlayerDirection 
+{
+	UP, 
+	DOWN, 
+	LEFT, 
+	RIGHT
+};
 
 
 class PlayerBehaviourComponent : public Component
@@ -5,6 +12,7 @@ class PlayerBehaviourComponent : public Component
 	float time_fire_pressed;	// time from the last time the fire button was pressed
 	ObjectPool<Rocket> * rockets_pool;
 	int playerNumber;
+	PlayerDirection dir;
 
 public:
 	virtual ~PlayerBehaviourComponent() {}
@@ -31,9 +39,13 @@ public:
 		AvancezLib::KeyStatus keys = 
 			system->getKeyStatus(this -> playerNumber);
 		if (keys.right)
-			Move(dt * PLAYER_SPEED);
+			MoveHorizontal(dt * PLAYER_SPEED);
 		else if (keys.left)
-			Move(-dt * PLAYER_SPEED);
+			MoveHorizontal(-dt * PLAYER_SPEED);
+		if (keys.down)
+			MoveVertical(dt * PLAYER_SPEED);
+		else if (keys.up)
+			MoveVertical(-dt * PLAYER_SPEED);
 		if (keys.fire)
 		{
 			if (CanFire())
@@ -52,15 +64,21 @@ public:
 
 	// move the player left or right
 	// param move depends on the time, so the player moves always at the same speed on any computer
-	void Move(float move)
+	void MoveHorizontal(float move)
 	{
-		go->horizontalPosition += move;
-
-		if (go->horizontalPosition > (640 - 32))
-			go->horizontalPosition = 640 - 32;
-			
+		go->horizontalPosition = go -> horizontalPosition + move;
 		if (go->horizontalPosition < 0)
 			go->horizontalPosition = 0;
+		if (go->horizontalPosition > 640 - 32)
+			go->horizontalPosition = 640 - 32;
+	}
+
+	void MoveVertical(float move) {
+		go->verticalPosition = go->verticalPosition + move;
+		if (go->verticalPosition < 0)
+			go->verticalPosition = 0;
+		if (go->verticalPosition > 480 - 32)
+			go->verticalPosition = 480 - 32;
 	}
 
 	// return true if enough time has passed from the previous rocket
