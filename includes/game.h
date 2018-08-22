@@ -33,8 +33,7 @@ public:
 		// Set Prop Player1
 		player1 = new Player();
 		PlayerBehaviourComponent * player1_behaviour = new PlayerBehaviourComponent();
-		player1_behaviour->setPlayerNumber(1);
-		player1_behaviour->Create(system, player1, &game_objects, &rockets_pool);
+		player1_behaviour->Create(system, player1, &game_objects, &rockets_pool,1,gameMap);
 		RenderComponent * player1_render = new RenderComponent();
 		player1_render->Create(system, player1, &game_objects, "WorriorBlue.bmp");
 
@@ -46,8 +45,7 @@ public:
 		// Set Prop Player2
 		player2 = new Player();
 		PlayerBehaviourComponent * player2_behaviour = new PlayerBehaviourComponent();
-		player2_behaviour->setPlayerNumber(2);
-		player2_behaviour->Create(system, player2, &game_objects, &rockets_pool);
+		player2_behaviour->Create(system, player2, &game_objects, &rockets_pool,2,gameMap);
 		RenderComponent * player2_render = new RenderComponent();
 		player2_render->Create(system, player2, &game_objects, "WorriorGold.bmp");
 

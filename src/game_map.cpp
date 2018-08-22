@@ -98,11 +98,16 @@ GameMap::GameMap(
 		}
 		row++;
 	}
+	std::cout << "Num Of Tiles: " << tiles.size() << std::endl;
+	std::cout << "Width: " << this->width;
+	std::cout << " height: " << this->height;
+	std::cout << std::endl;
 	for (MapTile * tile : tiles)
 	{
 		RenderComponent * tileRenderer = createTileRenderer(tile, system, game_objects);
 		tile -> AddComponent(tileRenderer);
 	}
+
 	SDL_Log("GameMap Created");
 }
 
@@ -134,6 +139,16 @@ void GameMap::printBinaryMap()
 	}
 	std::cout << "]";
 }
+
+void GameMap::placeObject(GameObject * go, int x, int y)
+{
+	MapTile * tile = tiles.at(this -> width * y + x);
+	go->horizontalPosition = tile->horizontalPosition;
+	go->verticalPosition = tile->verticalPosition;
+}
+
+int GameMap::getWidth() { return this->width; }
+int GameMap::getHeight() { return this->height; }
 
 GameMap * CreateStandardMap(
 	AvancezLib * system,

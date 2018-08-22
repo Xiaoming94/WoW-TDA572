@@ -39,6 +39,9 @@ public:
 	~GameMap();
 	void renderMap(float dt);
 	void printBinaryMap();
+	void placeObject(GameObject * go, int x, int y);
+	int getWidth();
+	int getHeight();
 };
 
 GameMap * CreateStandardMap(AvancezLib * system, std::set<GameObject*> * game_objects);

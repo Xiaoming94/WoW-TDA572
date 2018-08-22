@@ -1,4 +1,4 @@
-
+#include "game_map.h"
 
 class PlayerBehaviourComponent : public Component
 {
@@ -9,21 +9,24 @@ class PlayerBehaviourComponent : public Component
 public:
 	virtual ~PlayerBehaviourComponent() {}
 
-	virtual void Create(AvancezLib* system, GameObject * go, std::set<GameObject*> * game_objects, ObjectPool<Rocket> * rockets_pool)
+	virtual void Create(AvancezLib* system, GameObject * go, std::set<GameObject*> * game_objects, ObjectPool<Rocket> * rockets_pool, int playerNum, GameMap * map)
 	{
 		Component::Create(system, go, game_objects);
 		this->rockets_pool = rockets_pool;
+		this->playerNumber = playerNum;
+		if (playerNumber == 1) 
+		{
+			map -> placeObject(this->go, 0, map -> getHeight()-1);
+		}
+		else 
+		{
+			map -> placeObject(this->go, map -> getWidth()-1, map -> getHeight()-1);
+		}
 	}
 
 	virtual void Init()
 	{
-		go->horizontalPosition = 320;
-		go->verticalPosition = 480 - 32;
 		time_fire_pressed = -10000.f;
-	}
-	virtual void setPlayerNumber(int playerNumber)
-	{
-		this->playerNumber = playerNumber;
 	}
 	virtual void Update(float dt)
 	{
