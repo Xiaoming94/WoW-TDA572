@@ -1,10 +1,3 @@
-enum PlayerDirection 
-{
-	UP, 
-	DOWN, 
-	LEFT, 
-	RIGHT
-};
 
 
 class PlayerBehaviourComponent : public Component
@@ -12,7 +5,6 @@ class PlayerBehaviourComponent : public Component
 	float time_fire_pressed;	// time from the last time the fire button was pressed
 	ObjectPool<Rocket> * rockets_pool;
 	int playerNumber;
-	PlayerDirection dir;
 
 public:
 	virtual ~PlayerBehaviourComponent() {}
@@ -27,7 +19,6 @@ public:
 	{
 		go->horizontalPosition = 320;
 		go->verticalPosition = 480 - 32;
-		this->dir = LEFT;
 		time_fire_pressed = -10000.f;
 	}
 	virtual void setPlayerNumber(int playerNumber)
@@ -39,13 +30,28 @@ public:
 		AvancezLib::KeyStatus keys = 
 			system->getKeyStatus(this -> playerNumber);
 		if (keys.right)
+		{
+			go->SetDirection(Direction::RIGHT);
 			MoveHorizontal(dt * PLAYER_SPEED);
+		}
+			
 		if (keys.left)
+		{
+			go->SetDirection(Direction::LEFT);
 			MoveHorizontal(-dt * PLAYER_SPEED);
+		}
 		if (keys.down)
+		{
+			go->SetDirection(Direction::DOWN);
 			MoveVertical(dt * PLAYER_SPEED);
+		}
+			
 		if (keys.up)
+		{
+			go->SetDirection(Direction::UP);
 			MoveVertical(-dt * PLAYER_SPEED);
+		}
+			
 		if (keys.fire)
 		{
 			if (CanFire())
@@ -54,7 +60,7 @@ public:
 				Rocket * rocket = rockets_pool->FirstAvailable();
 				if (rocket != NULL)	// rocket is NULL is the object pool can not provide an object
 				{
-					rocket->Init(go->horizontalPosition);
+					rocket->Init(go->horizontalPosition, go->verticalPosition);
 					game_objects->insert(rocket);
 				}
 			}
