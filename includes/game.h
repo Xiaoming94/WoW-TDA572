@@ -11,7 +11,8 @@ class Game : public GameObject
 
 	ObjectPool<Rocket> rockets_pool;	// used to instantiate rockets
 
-	Player * player;
+	Player * player1;
+	Player * player2;
 
 	Sprite * life_sprite;
 
@@ -29,18 +30,34 @@ public:
 		this->system = system;
 		gameMap = CreateStandardMap(system, &game_objects);
 
-		player = new Player();
-		PlayerBehaviourComponent * player_behaviour = new PlayerBehaviourComponent();
-		player_behaviour->setPlayerNumber(1);
-		player_behaviour->Create(system, player, &game_objects, &rockets_pool);
-		RenderComponent * player_render = new RenderComponent();
-		player_render->Create(system, player, &game_objects, "WorriorBlue.bmp");
+		// Set Prop Player1
+		player1 = new Player();
+		PlayerBehaviourComponent * player1_behaviour = new PlayerBehaviourComponent();
+		player1_behaviour->setPlayerNumber(1);
+		player1_behaviour->Create(system, player1, &game_objects, &rockets_pool);
+		RenderComponent * player1_render = new RenderComponent();
+		player1_render->Create(system, player1, &game_objects, "WorriorBlue.bmp");
 
-		player->Create();
-		player->AddComponent(player_behaviour);
-		player->AddComponent(player_render);
-		player->AddReceiver(this);
-		game_objects.insert(player);
+		player1->Create();
+		player1->AddComponent(player1_behaviour);
+		player1->AddComponent(player1_render);
+		player1->AddReceiver(this);
+		
+		// Set Prop Player2
+		player2 = new Player();
+		PlayerBehaviourComponent * player2_behaviour = new PlayerBehaviourComponent();
+		player2_behaviour->setPlayerNumber(2);
+		player2_behaviour->Create(system, player2, &game_objects, &rockets_pool);
+		RenderComponent * player2_render = new RenderComponent();
+		player2_render->Create(system, player2, &game_objects, "WorriorGold.bmp");
+
+		player2->Create();
+		player2->AddComponent(player2_behaviour);
+		player2->AddComponent(player2_render);
+		player2->AddReceiver(this);
+
+		game_objects.insert(player1);
+		game_objects.insert(player2);
 
 		rockets_pool.Create(30);
 		for (auto rocket = rockets_pool.pool.begin(); rocket != rockets_pool.pool.end(); rocket++)
@@ -61,7 +78,8 @@ public:
 
 	virtual void Init()
 	{
-		player->Init();
+		player1->Init();
+		player2->Init();
 
 		enabled = true;
 		game_over = false;
@@ -85,7 +103,7 @@ public:
 		sprintf(msg, "bonus: %.1fX", game_speed);
 		system->drawText(510, 32, msg);
 
-		for (int i = 0; i < player->lives; i++)
+		for (int i = 0; i < player1->lives; i++)
 			life_sprite->draw(i*36+20, 16);
 
 		if (IsGameOver())
@@ -125,6 +143,6 @@ public:
 		life_sprite->destroy();
 	
 		rockets_pool.Destroy();
-		delete player;
+		delete player1;
 	}
 };
