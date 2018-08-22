@@ -5,7 +5,7 @@
 void GameObject::Create()
 {
 	SDL_Log("GameObject::Create");
-
+	dir = Direction::NONE;
 	enabled = false;
 }
 
@@ -59,4 +59,9 @@ void GameObject::Send(Message m)
 
 		receivers[i]->Receive(m);
 	}
+}
+
+void GameObject::SetDirection(Direction dir)
+{
+	this->dir = dir;
 }

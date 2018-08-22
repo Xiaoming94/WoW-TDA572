@@ -8,6 +8,15 @@
 
 enum Message { HIT, ALIEN_HIT, GAME_OVER, LEVEL_WIN, NO_MSG };
 
+enum Direction
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	NONE
+};
+
 class Component;
 
 class GameObject
@@ -15,6 +24,7 @@ class GameObject
 protected:
 	std::vector<GameObject*> receivers;
 	std::vector<Component*> components;
+	Direction dir;
 
 public:
 	double horizontalPosition;
@@ -31,6 +41,7 @@ public:
 	virtual void Destroy();
 	virtual void AddReceiver(GameObject *go);
 	virtual void Receive(Message m) {}
+	virtual void SetDirection(Direction dir);
 	void Send(Message m);
 };
 

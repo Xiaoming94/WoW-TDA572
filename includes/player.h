@@ -27,7 +27,7 @@ public:
 	{
 		go->horizontalPosition = 320;
 		go->verticalPosition = 480 - 32;
-
+		this->dir = LEFT;
 		time_fire_pressed = -10000.f;
 	}
 	virtual void setPlayerNumber(int playerNumber)
@@ -40,11 +40,11 @@ public:
 			system->getKeyStatus(this -> playerNumber);
 		if (keys.right)
 			MoveHorizontal(dt * PLAYER_SPEED);
-		else if (keys.left)
+		if (keys.left)
 			MoveHorizontal(-dt * PLAYER_SPEED);
 		if (keys.down)
 			MoveVertical(dt * PLAYER_SPEED);
-		else if (keys.up)
+		if (keys.up)
 			MoveVertical(-dt * PLAYER_SPEED);
 		if (keys.fire)
 		{
