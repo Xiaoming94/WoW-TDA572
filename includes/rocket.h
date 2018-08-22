@@ -5,8 +5,14 @@ public:
 
 	void Update(float dt)
 	{
-		go->verticalPosition -= ROCKET_SPEED * dt; // rocket_speed * time
-
+		if (go -> GetDirection() == Direction::UP)
+			go->verticalPosition -= ROCKET_SPEED * dt; // rocket_speed * time
+		if (go->GetDirection() == Direction::DOWN)
+			go->verticalPosition += ROCKET_SPEED * dt;
+		if (go->GetDirection() == Direction::LEFT)
+			go->horizontalPosition -= ROCKET_SPEED * dt;
+		if (go->GetDirection() == Direction::RIGHT)
+			go->horizontalPosition += ROCKET_SPEED * dt;
 		if (go->verticalPosition < 0) // When the rocket reaches the top of the screen, it disappears.
 			go->enabled = false;
 	}
@@ -19,13 +25,14 @@ class Rocket : public GameObject
 
 public:
 
-	virtual void Init(double xPos, double yPos)
+	virtual void Init(double xPos, double yPos, Direction dir)
 	{
 		SDL_Log("Rocket::Init");
 		GameObject::Init();
 
 		horizontalPosition = xPos;
 		verticalPosition = yPos;
+		this->dir = dir;
 	}
 
 	virtual void Receive(Message m)
