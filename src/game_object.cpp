@@ -65,3 +65,8 @@ void GameObject::SetDirection(Direction dir)
 {
 	this->dir = dir;
 }
+
+Direction GameObject::GetDirection()
+{
+	return this->dir;
+}

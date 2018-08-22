@@ -42,6 +42,7 @@ public:
 	virtual void AddReceiver(GameObject *go);
 	virtual void Receive(Message m) {}
 	virtual void SetDirection(Direction dir);
+	virtual Direction GetDirection();
 	void Send(Message m);
 };
 
