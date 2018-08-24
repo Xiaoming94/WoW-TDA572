@@ -10,7 +10,7 @@ This project is for the Game Engine Architecture Course (TDA572) given at the In
 - [x] Player 2 Placement and Rendering
 - [x] Basic Controls for Player 2
 - [ ] Monster Placement and Rendering
-- [ ] Wall detection
+- [x] Wall detection
 - [ ] Collision Detection with Projectiles
 - [ ] Monster Collision Detection
 - [ ] Player Collision Detection
