@@ -93,11 +93,14 @@ bool AvancezLib::update()
 		{
 			switch (event.key.keysym.sym)
 			{
+			/**
+			 * Player 1 Keybindings
+			 */
 			case SDLK_ESCAPE:
 			case SDLK_q:
 				go_on = false;
 				break;
-			case SDLK_SPACE:
+			case SDLK_c:
 				p1key.fire = true;
 				break;
 			case SDLK_a:
@@ -112,6 +115,24 @@ bool AvancezLib::update()
 			case SDLK_s:
 				p1key.down = true;
 				break;
+			/**
+			 * Player 2 Keybindings
+			 */
+			case SDLK_m:
+				p2key.fire = true;
+				break;
+			case SDLK_g:
+				p2key.left = true;
+				break;
+			case SDLK_j:
+				p2key.right = true;
+				break;
+			case SDLK_y:
+				p2key.up = true;
+				break;
+			case SDLK_h:
+				p2key.down = true;
+				break;
 			}
 		}
 
@@ -119,7 +140,7 @@ bool AvancezLib::update()
 		{
 			switch (event.key.keysym.sym)
 			{
-			case SDLK_SPACE:
+			case SDLK_c:
 				p1key.fire = false;
 				break;
 			case SDLK_a:
@@ -133,6 +154,21 @@ bool AvancezLib::update()
 				break;
 			case SDLK_s:
 				p1key.down = false;
+				break;
+			case SDLK_m:
+				p2key.fire = false;
+				break;
+			case SDLK_g:
+				p2key.left = false;
+				break;
+			case SDLK_j:
+				p2key.right = false;
+				break;
+			case SDLK_y:
+				p2key.up = false;
+				break;
+			case SDLK_h:
+				p2key.down = false;
 				break;
 			}
 		}
