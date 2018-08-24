@@ -1,6 +1,6 @@
 #include "game_map.h"
 
-class PlayerBehaviourComponent : public Component
+class PlayerBehaviourComponent : public BehaviourComponent
 {
 	float time_fire_pressed;	// time from the last time the fire button was pressed
 	ObjectPool<Rocket> * rockets_pool;
@@ -11,7 +11,7 @@ public:
 
 	virtual void Create(AvancezLib* system, GameObject * go, std::set<GameObject*> * game_objects, ObjectPool<Rocket> * rockets_pool, int playerNum, GameMap * map)
 	{
-		Component::Create(system, go, game_objects);
+		BehaviourComponent::Create(system, go, game_objects, map);
 		this->rockets_pool = rockets_pool;
 		this->playerNumber = playerNum;
 		if (playerNumber == 1) 
@@ -30,29 +30,30 @@ public:
 	}
 	virtual void Update(float dt)
 	{
+		double change = dt * PLAYER_SPEED;
 		AvancezLib::KeyStatus keys = 
 			system->getKeyStatus(this -> playerNumber);
-		if (keys.right)
+		if (keys.right && !map->isColliding(Direction::RIGHT, change ,this->go))
 		{
 			go->SetDirection(Direction::RIGHT);
-			MoveHorizontal(dt * PLAYER_SPEED);
+			MoveHorizontal(change);
 		}
 			
-		if (keys.left)
+		if (keys.left && !map->isColliding(Direction::LEFT, change, this ->go))
 		{
 			go->SetDirection(Direction::LEFT);
-			MoveHorizontal(-dt * PLAYER_SPEED);
+			MoveHorizontal(-1 * change);
 		}
-		if (keys.down)
+		if (keys.down && !map->isColliding(Direction::DOWN, change, this ->go))
 		{
 			go->SetDirection(Direction::DOWN);
-			MoveVertical(dt * PLAYER_SPEED);
+			MoveVertical(change);
 		}
 			
-		if (keys.up)
+		if (keys.up && !map->isColliding(Direction::UP, change, this ->go))
 		{
 			go->SetDirection(Direction::UP);
-			MoveVertical(-dt * PLAYER_SPEED);
+			MoveVertical(-1 * change);
 		}
 			
 		if (keys.fire)

@@ -1,6 +1,7 @@
 #include "component.h"
 #include "game_object.h"
 #include "avancezlib.h"
+#include "behaviour_component.h"
 
 void Component::Create(AvancezLib * system, GameObject * go, std::set<GameObject*>* game_objects)
 {

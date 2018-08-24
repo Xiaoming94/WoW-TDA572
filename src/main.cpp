@@ -10,7 +10,7 @@
 
 #include "component.h"
 #include "game_object.h"
-
+#include "behaviour_component.h"
 
 #include "rocket.h"
 #include "player.h"

@@ -19,6 +19,8 @@
 #define TILE_LEFT "WallLeft.bmp"
 #define TILE_RIGHT "WallRight.bmp"
 
+#define MAP_OFFSET 64
+
 #include <string>
 #include "game_object.h"
 #include "component.h"

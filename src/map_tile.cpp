@@ -1,7 +1,7 @@
 #include "map_tile.h"
 #include "avancezlib.h"
 #include <iostream>
-#define MAP_OFFSET 64
+
 MapTile::MapTile(int row, int col)
 {
 	SDL_Log("Tile Created");

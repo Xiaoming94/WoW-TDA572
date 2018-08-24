@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\avancezlib.h" />
+    <ClInclude Include="includes\behaviour_component.h" />
     <ClInclude Include="includes\component.h" />
     <ClInclude Include="includes\constants.h" />
     <ClInclude Include="includes\game.h" />

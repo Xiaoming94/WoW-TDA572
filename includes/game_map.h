@@ -28,6 +28,10 @@ private:
 	bool ** bpm; // binary Pixel Map
 	int width;
 	int height;
+	bool collidingLeft(int x, int y);
+	bool collidingRight(int x, int y);
+	bool collidingUp(int x, int y);
+	bool collidingDown(int x, int y);
 public:
 	GameMap(
 		std::string mapString,
@@ -42,6 +46,7 @@ public:
 	void placeObject(GameObject * go, int x, int y);
 	int getWidth();
 	int getHeight();
+	bool isColliding(Direction dir, double change, GameObject * go);
 };
 
 GameMap * CreateStandardMap(AvancezLib * system, std::set<GameObject*> * game_objects);

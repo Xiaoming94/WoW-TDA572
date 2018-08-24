@@ -117,6 +117,42 @@ GameMap::~GameMap()
 	SDL_Log("GameMap Destroyed");
 }
 
+bool GameMap::collidingLeft(int x, int  y)
+{
+	for (int i = x + 3; i < x + SPRITE_SIDE - 3; i++)
+		for (int j = y + 3; j < y + SPRITE_SIDE - 3; j++)
+			if (this->bpm[j][i])
+				return true;
+	return false;
+}
+
+bool GameMap::collidingRight(int x, int y)
+{
+	for (int i = x + SPRITE_SIDE - 3; i > x + 3; i--)
+		for (int j = y + 3; j < y + SPRITE_SIDE - 3; j++)
+			if (this->bpm[j][i])
+				return true;
+	return false;
+}
+
+bool GameMap::collidingUp(int x, int y)
+{
+	for (int i = y + 3; i < y + SPRITE_SIDE - 3; i++)
+		for (int j = x + 3; j < x + SPRITE_SIDE - 3; j++)
+			if (this->bpm[i][j])
+				return true;
+	return false;
+}
+
+bool GameMap::collidingDown(int x, int y)
+{
+	for (int i = y + SPRITE_SIDE - 3; i > y + 3; i--)
+		for (int j = x + 3; j < x + SPRITE_SIDE - 3; j++)
+			if (this->bpm[i][j])
+				return true;
+	return false;
+}
+
 void GameMap::renderMap(float dt)
 {
 	for (MapTile * tile : tiles)
@@ -149,6 +185,33 @@ void GameMap::placeObject(GameObject * go, int x, int y)
 
 int GameMap::getWidth() { return this->width; }
 int GameMap::getHeight() { return this->height; }
+
+bool GameMap::isColliding(Direction dir, double change, GameObject * go)
+{
+	switch (dir)
+	{
+	case Direction::UP :
+		return collidingUp(
+			(int)(go->horizontalPosition - MAP_OFFSET), 
+			(int)(go->verticalPosition - change - MAP_OFFSET)
+		);
+	case Direction::DOWN :
+		return collidingDown(
+			(int)(go->horizontalPosition - MAP_OFFSET), 
+			(int)(go->verticalPosition + change - MAP_OFFSET)
+		);
+	case Direction::LEFT :
+		return collidingLeft(
+			(int)(go->horizontalPosition - change - MAP_OFFSET),
+			(int)(go->verticalPosition - MAP_OFFSET) 
+		);
+	case Direction::RIGHT :
+		return collidingRight(
+			(int)(go->horizontalPosition + change - MAP_OFFSET), 
+			(int)(go->verticalPosition - MAP_OFFSET)
+		);
+	}
+}
 
 GameMap * CreateStandardMap(
 	AvancezLib * system,
