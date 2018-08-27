@@ -6,7 +6,18 @@
 
 #define SPRITE_SIDE 32
 
-enum Message { HIT, ALIEN_HIT, GAME_OVER, LEVEL_WIN, NO_MSG };
+enum Message { 
+	HIT, 
+	GAME_OVER, 
+	LEVEL_WIN, 
+	NO_MSG, 
+	GARWOR_HIT,
+	BURWOR_HIT,
+	THORWOR_HIT,
+	WORLUK_HIT,
+	WIZARD_HIT,
+	PLAYER_HIT
+};
 
 enum Direction
 {
@@ -41,6 +52,7 @@ public:
 	virtual void Destroy();
 	virtual void AddReceiver(GameObject *go);
 	virtual void Receive(Message m) {}
+	virtual Message GetCollideMessage();
 	virtual void SetDirection(Direction dir);
 	virtual Direction GetDirection();
 	void Send(Message m);

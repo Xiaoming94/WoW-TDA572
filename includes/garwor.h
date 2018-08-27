@@ -8,6 +8,10 @@ public:
 	{
 		return GARWOR;
 	}
+	Message GetCollideMessage()
+	{
+		return Message::GARWOR_HIT;
+	}
 };
 
 #endif

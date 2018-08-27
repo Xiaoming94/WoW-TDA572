@@ -53,7 +53,7 @@ void CollideComponent::Update(float dt)
 				(go0->verticalPosition   > go->verticalPosition - 10) &&
 				(go0->verticalPosition   < go->verticalPosition + 10))
 			{
-				go->Receive(HIT);
+				go->Receive(go0 -> GetCollideMessage());
 				go0->Receive(HIT);
 			}
 		}

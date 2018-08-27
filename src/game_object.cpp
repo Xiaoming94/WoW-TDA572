@@ -70,3 +70,8 @@ Direction GameObject::GetDirection()
 {
 	return this->dir;
 }
+
+Message GameObject::GetCollideMessage()
+{
+	return HIT;
+}

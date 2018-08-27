@@ -8,6 +8,10 @@ public:
 	{
 		return BURWOR;
 	}
+	Message GetCollideMessage()
+	{
+		return Message::BURWOR_HIT;
+	}
 };
 
 #endif

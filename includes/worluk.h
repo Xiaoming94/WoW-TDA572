@@ -8,6 +8,11 @@ public:
 	{
 		return WORLUK;
 	}
+
+	Message GetCollideMessage()
+	{
+		return Message::WORLUK_HIT;
+	}
 };
 
 #endif

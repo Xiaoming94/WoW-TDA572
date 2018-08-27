@@ -8,6 +8,11 @@ public:
 	{
 		return WIZARD;
 	}
+
+	Message GetCollideMessage()
+	{
+		return Message::WIZARD_HIT;
+	}
 };
 
 #endif

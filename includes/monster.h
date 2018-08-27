@@ -37,6 +37,12 @@ public:
 	}
 };
 
+RenderComponent * createMonsterRender(AvancezLib * system, std::set<GameObject*> * game_objects, Monster * monster)
+{
+	RenderComponent * renderer = new RenderComponent();
+	renderer->Create(system, monster, game_objects, monster->GetMonsterType().c_str());
+	return renderer;
+}
 #include "burwor.h"
 #include "wizard.h"
 #include "garwor.h"

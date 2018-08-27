@@ -19,6 +19,8 @@ class Game : public GameObject
 	GameMap * gameMap;
 	bool game_over;
 
+	ObjectPool<GameObject> * monsterPool = new ObjectPool<GameObject>();
+
 public:
 
 	virtual void Create(AvancezLib* system)
@@ -55,30 +57,44 @@ public:
 		game_objects.insert(player1);
 		game_objects.insert(player2);
 
+		Monster * monster1 = new Burwor();
+		MonsterBehaviourComponent * monster1_behaviour = new MonsterBehaviourComponent();
+		monster1_behaviour->Create(system, monster1, &game_objects, gameMap, 0, 0);
+		RenderComponent * monster1_render = createMonsterRender(system, &game_objects, monster1);
+		monster1->Create();
+		monster1->AddComponent(monster1_behaviour);
+		monster1->AddComponent(monster1_render);
+		game_objects.insert(monster1);
+		monsterPool->pool.push_back(monster1);
+
+		Monster * monster2 = new Thorwor();
+		MonsterBehaviourComponent * monster2_behaviour = new MonsterBehaviourComponent();
+		monster2_behaviour->Create(system, monster2, &game_objects, gameMap, 0, 1);
+		RenderComponent * monster2_render = createMonsterRender(system, &game_objects, monster2);
+		monster2->Create();
+		monster2->AddComponent(monster2_behaviour);
+		monster2->AddComponent(monster2_render);
+		game_objects.insert(monster2);
+		monsterPool->pool.push_back(monster2);
+
 		rockets_pool.Create(30);
 		for (auto rocket = rockets_pool.pool.begin(); rocket != rockets_pool.pool.end(); rocket++)
 		{
 			RocketBehaviourComponent * behaviour = new RocketBehaviourComponent();
 			behaviour->Create(system, *rocket, &game_objects);
 			RenderComponent * render = new RenderComponent();
+			CollideComponent * collider = new CollideComponent();
+			collider->Create(system, *rocket, &game_objects, monsterPool);
 			render->Create(system, *rocket, &game_objects, "rocket.bmp");
 			(*rocket)->Create();
 			(*rocket)->AddComponent(behaviour);
 			(*rocket)->AddComponent(render);
+			(*rocket)->AddComponent(collider);
 		}
 
 		// CREATE MONSTERS
 
-		Monster * monster1 = new Burwor();
-		MonsterBehaviourComponent * monster1_behaviour = new MonsterBehaviourComponent();
-		monster1_behaviour->Create(system, monster1, &game_objects, gameMap, 1, 1);
-		RenderComponent * monster1_render = new RenderComponent();
-		monster1_render->Create(system, monster1, &game_objects, monster1->GetMonsterType().c_str());
-		monster1->Create();
-		monster1->AddComponent(monster1_behaviour);
-		monster1->AddComponent(monster1_render);
-		monster1->Init();
-		game_objects.insert(monster1);
+
 		life_sprite = system->createSprite("player.bmp");
 	}
 
@@ -86,7 +102,10 @@ public:
 	{
 		player1->Init();
 		player2->Init();
-
+		for (GameObject * go : monsterPool->pool)
+		{
+			go->Init();
+		}
 		enabled = true;
 		game_over = false;
 	}

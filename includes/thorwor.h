@@ -8,6 +8,11 @@ public:
 	{
 		return THORWOR;
 	}
+
+	Message GetCollideMessage()
+	{
+		return Message::THORWOR_HIT;
+	}
 };
 
 #endif

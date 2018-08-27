@@ -64,7 +64,7 @@ public:
 				Rocket * rocket = rockets_pool->FirstAvailable();
 				if (rocket != NULL)	// rocket is NULL is the object pool can not provide an object
 				{
-					rocket->Init(go->horizontalPosition, go->verticalPosition,go->GetDirection());
+					rocket->Init(go->horizontalPosition, go->verticalPosition,go->GetDirection(),go);
 					game_objects->insert(rocket);
 				}
 			}
@@ -130,7 +130,11 @@ public:
 			RemoveLife();
 
 			if (lives < 0)
-				Send(GAME_OVER);
+				this->enabled = false;
+		}
+		if (m == BURWOR_HIT)
+		{
+			SDL_Log("You HIT a BURWOR");
 		}
 	}
 
@@ -138,5 +142,10 @@ public:
 	{
 		lives--;
 		SDL_Log("remaining lives %d", lives);
+	}
+
+	Message GetCollideMessage()
+	{
+		return PLAYER_HIT;
 	}
 };

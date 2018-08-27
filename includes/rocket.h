@@ -22,10 +22,9 @@ public:
 // rockets are shot by the player towards the aliens
 class Rocket : public GameObject
 {
-
 public:
-
-	virtual void Init(double xPos, double yPos, Direction dir)
+	GameObject * source;
+	virtual void Init(double xPos, double yPos, Direction dir, GameObject * source)
 	{
 		SDL_Log("Rocket::Init");
 		GameObject::Init();
@@ -33,6 +32,7 @@ public:
 		horizontalPosition = xPos;
 		verticalPosition = yPos;
 		this->dir = dir;
+		this->source = source;
 	}
 
 	virtual void Receive(Message m)
@@ -40,10 +40,11 @@ public:
 		if (!enabled)
 			return;
 
-		if (m == HIT)
+		if (m != HIT)
 		{
-			enabled = false;
-			SDL_Log("Rocket::Hit");
+			source->Receive(m);
 		}
+		enabled = false;
+		SDL_Log("Rocket::Hit");
 	}
 };
