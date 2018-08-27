@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Map">
       <UniqueIdentifier>{b3d27441-6dd7-4aa6-94c6-cbed6b5adb43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Monsters">
+      <UniqueIdentifier>{6ea2c6f2-43b6-4cde-821c-70041818b9ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\avancezlib.cpp">
@@ -133,6 +136,24 @@
     </ClInclude>
     <ClInclude Include="includes\behaviour_component.h">
       <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\monster.h">
+      <Filter>Header Files\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\burwor.h">
+      <Filter>Header Files\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\garwor.h">
+      <Filter>Header Files\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\thorwor.h">
+      <Filter>Header Files\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\wizard.h">
+      <Filter>Header Files\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\worluk.h">
+      <Filter>Header Files\Monsters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
