@@ -19,8 +19,6 @@ class Game : public GameObject
 	GameMap * gameMap;
 	bool game_over;
 
-	unsigned int score = 0;
-
 public:
 
 	virtual void Create(AvancezLib* system)
@@ -69,9 +67,19 @@ public:
 			(*rocket)->AddComponent(render);
 		}
 
+		// CREATE MONSTERS
 
+		Monster * monster1 = new Burwor();
+		MonsterBehaviourComponent * monster1_behaviour = new MonsterBehaviourComponent();
+		monster1_behaviour->Create(system, monster1, &game_objects, gameMap, 1, 1);
+		RenderComponent * monster1_render = new RenderComponent();
+		monster1_render->Create(system, monster1, &game_objects, monster1->GetMonsterType().c_str());
+		monster1->Create();
+		monster1->AddComponent(monster1_behaviour);
+		monster1->AddComponent(monster1_render);
+		monster1->Init();
+		game_objects.insert(monster1);
 		life_sprite = system->createSprite("player.bmp");
-		score = 0;
 	}
 
 	virtual void Init()
@@ -96,7 +104,7 @@ public:
 	virtual void Draw()
 	{
 		char msg[1024];
-		sprintf(msg, "%07d", Score());
+		sprintf(msg, "%07d", 100);
 		system->drawText(300, 32, msg);
 		sprintf(msg, "bonus: %.1fX", game_speed);
 		system->drawText(510, 32, msg);
@@ -115,20 +123,12 @@ public:
 	{
 		if (m == GAME_OVER)
 			game_over = true;
-
-		if (m == ALIEN_HIT)
-			score += POINTS_PER_ALIEN * game_speed;
 	}
 
 
 	bool IsGameOver()
 	{
 		return game_over;
-	}
-
-	unsigned int Score()
-	{
-		return score;
 	}
 
 	virtual void Destroy()
