@@ -11,9 +11,9 @@ This project is for the Game Engine Architecture Course (TDA572) given at the In
 - [x] Basic Controls for Player 2
 - [x] Monster Placement and Rendering
 - [x] Wall detection
-- [ ] Collision Detection with Projectiles
-- [ ] Monster Collision Detection
-- [ ] Player Collision Detection
+- [x] Collision Detection with Projectiles
+- [x] Monster Collision Detection
+- [x] Player Collision Detection
 - [ ] Basic AI Framework
 - [ ] AI Path finding
 - [ ] AI Heuristics
