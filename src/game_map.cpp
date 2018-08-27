@@ -146,7 +146,7 @@ bool GameMap::collidingUp(int x, int y)
 
 bool GameMap::collidingDown(int x, int y)
 {
-	for (int i = y + SPRITE_SIDE - 3; i > y + 3; i--)
+	for (int i = y + SPRITE_SIDE - 2; i > y + 3; i--)
 		for (int j = x + 3; j < x + SPRITE_SIDE - 3; j++)
 			if (this->bpm[i][j])
 				return true;

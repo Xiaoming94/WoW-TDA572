@@ -6,12 +6,9 @@ MapTile::MapTile(int row, int col)
 {
 	SDL_Log("Tile Created");
 
-	std::cout << "row :" << row << " col: " << col << "\n";
 	this -> enabled = true;
 	this -> verticalPosition   = MAP_OFFSET + row * SPRITE_SIDE;
 	this -> horizontalPosition = MAP_OFFSET + col * SPRITE_SIDE;
-	std::cout << "x: " << horizontalPosition <<
-		" y: " << verticalPosition << "\n";
 }
 
 MapTile::~MapTile()
